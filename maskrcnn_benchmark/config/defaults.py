@@ -276,6 +276,144 @@ _C.MODEL.RESNETS.STEM_OUT_CHANNELS = 64
 
 
 # ---------------------------------------------------------------------------- #
+# HRNet Options (Follow the open source code)
+# ---------------------------------------------------------------------------- #
+_C.MODEL.HRNET = CN()
+_C.MODEL.HRNET.OUTPUT_DIR = ''
+_C.MODEL.HRNET.LOG_DIR = ''
+_C.MODEL.HRNET.DATA_DIR = ''
+_C.MODEL.HRNET.GPUS = (0,)
+_C.MODEL.HRNET.WORKERS = 4
+_C.MODEL.HRNET.PRINT_FREQ = 20
+_C.MODEL.HRNET.AUTO_RESUME = False
+_C.MODEL.HRNET.PIN_MEMORY = True
+_C.MODEL.HRNET.RANK = 0
+
+# Cudnn related params
+_C.MODEL.HRNET.CUDNN.BENCHMARK = True
+_C.MODEL.HRNET.CUDNN.DETERMINISTIC = False
+_C.MODEL.HRNET.CUDNN.ENABLED = True
+
+# common params for NETWORK
+_C.MODEL.HRNET.MODEL.NAME = 'pose_hrnet'
+_C.MODEL.HRNET.MODEL.INIT_WEIGHTS = True
+_C.MODEL.HRNET.MODEL.PRETRAINED = ''
+_C.MODEL.HRNET.MODEL.NUM_JOINTS = 17
+_C.MODEL.HRNET.MODEL.TAG_PER_JOINT = True
+_C.MODEL.HRNET.MODEL.TARGET_TYPE = 'gaussian'
+_C.MODEL.HRNET.MODEL.IMAGE_SIZE = [256, 256]  # width * height, ex: 192 * 256
+_C.MODEL.HRNET.MODEL.HEATMAP_SIZE = [64, 64]  # width * height, ex: 24 * 32
+_C.MODEL.HRNET.MODEL.SIGMA = 2
+_C.MODEL.HRNET.MODEL.EXTRA = CN(new_allowed=True)
+
+_C.MODEL.HRNET.LOSS.USE_OHKM = False
+_C.MODEL.HRNET.LOSS.TOPK = 8
+_C.MODEL.HRNET.LOSS.USE_TARGET_WEIGHT = True
+_C.MODEL.HRNET.LOSS.USE_DIFFERENT_JOINTS_WEIGHT = False
+
+# DATASET related params
+_C.MODEL.HRNET.DATASET.ROOT = ''
+_C.MODEL.HRNET.DATASET.DATASET = 'mpii'
+_C.MODEL.HRNET.DATASET.TRAIN_SET = 'train'
+_C.MODEL.HRNET.DATASET.TEST_SET = 'valid'
+_C.MODEL.HRNET.DATASET.DATA_FORMAT = 'jpg'
+_C.MODEL.HRNET.DATASET.HYBRID_JOINTS_TYPE = ''
+_C.MODEL.HRNET.DATASET.SELECT_DATA = False
+
+# training data augmentation
+_C.MODEL.HRNET.DATASET.FLIP = True
+_C.MODEL.HRNET.DATASET.SCALE_FACTOR = 0.25
+_C.MODEL.HRNET.DATASET.ROT_FACTOR = 30
+_C.MODEL.HRNET.DATASET.PROB_HALF_BODY = 0.0
+_C.MODEL.HRNET.DATASET.NUM_JOINTS_HALF_BODY = 8
+_C.MODEL.HRNET.DATASET.COLOR_RGB = False
+
+# train
+_C.MODEL.HRNET.TRAIN.LR_FACTOR = 0.1
+_C.MODEL.HRNET.TRAIN.LR_STEP = [90, 110]
+_C.MODEL.HRNET.TRAIN.LR = 0.001
+
+_C.MODEL.HRNET.TRAIN.OPTIMIZER = 'adam'
+_C.MODEL.HRNET.TRAIN.MOMENTUM = 0.9
+_C.MODEL.HRNET.TRAIN.WD = 0.0001
+_C.MODEL.HRNET.TRAIN.NESTEROV = False
+_C.MODEL.HRNET.TRAIN.GAMMA1 = 0.99
+_C.MODEL.HRNET.TRAIN.GAMMA2 = 0.0
+
+_C.MODEL.HRNET.TRAIN.BEGIN_EPOCH = 0
+_C.MODEL.HRNET.TRAIN.END_EPOCH = 140
+
+_C.MODEL.HRNET.TRAIN.RESUME = False
+_C.MODEL.HRNET.TRAIN.CHECKPOINT = ''
+
+_C.MODEL.HRNET.TRAIN.BATCH_SIZE_PER_GPU = 32
+_C.MODEL.HRNET.TRAIN.SHUFFLE = True
+
+# testing
+# size of images for each device
+_C.MODEL.HRNET.TEST.BATCH_SIZE_PER_GPU = 32
+# Test Model Epoch
+_C.MODEL.HRNET.TEST.FLIP_TEST = False
+_C.MODEL.HRNET.TEST.POST_PROCESS = False
+_C.MODEL.HRNET.TEST.SHIFT_HEATMAP = False
+
+_C.MODEL.HRNET.TEST.USE_GT_BBOX = False
+
+# nms
+_C.MODEL.HRNET.TEST.IMAGE_THRE = 0.1
+_C.MODEL.HRNET.TEST.NMS_THRE = 0.6
+_C.MODEL.HRNET.TEST.SOFT_NMS = False
+_C.MODEL.HRNET.TEST.OKS_THRE = 0.5
+_C.MODEL.HRNET.TEST.IN_VIS_THRE = 0.0
+_C.MODEL.HRNET.TEST.COCO_BBOX_FILE = ''
+_C.MODEL.HRNET.TEST.BBOX_THRE = 1.0
+_C.MODEL.HRNET.TEST.MODEL_FILE = ''
+
+# debug
+_C.MODEL.HRNET.DEBUG.DEBUG = False
+_C.MODEL.HRNET.DEBUG.SAVE_BATCH_IMAGES_GT = False
+_C.MODEL.HRNET.DEBUG.SAVE_BATCH_IMAGES_PRED = False
+_C.MODEL.HRNET.DEBUG.SAVE_HEATMAPS_GT = False
+_C.MODEL.HRNET.DEBUG.SAVE_HEATMAPS_PRED = False
+
+
+def update_config(cfg, args):
+    cfg.defrost()
+    cfg.merge_from_file(args.cfg)
+    cfg.merge_from_list(args.opts)
+
+    if args.modelDir:
+        cfg.OUTPUT_DIR = args.modelDir
+
+    if args.logDir:
+        cfg.LOG_DIR = args.logDir
+
+    if args.dataDir:
+        cfg.DATA_DIR = args.dataDir
+
+    cfg.DATASET.ROOT = os.path.join(
+        cfg.DATA_DIR, cfg.DATASET.ROOT
+    )
+
+    cfg.MODEL.PRETRAINED = os.path.join(
+        cfg.DATA_DIR, cfg.MODEL.PRETRAINED
+    )
+
+    if cfg.TEST.MODEL_FILE:
+        cfg.TEST.MODEL_FILE = os.path.join(
+            cfg.DATA_DIR, cfg.TEST.MODEL_FILE
+        )
+
+    cfg.freeze()
+
+'''
+if __name__ == '__main__':
+    import sys
+    with open(sys.argv[1], 'w') as f:
+        print(_C, file=f)
+'''
+
+# ---------------------------------------------------------------------------- #
 # RetinaNet Options (Follow the Detectron version)
 # ---------------------------------------------------------------------------- #
 _C.MODEL.RETINANET = CN()
