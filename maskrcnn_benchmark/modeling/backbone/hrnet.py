@@ -286,7 +286,7 @@ class PoseHighResolutionNet(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.layer1 = self._make_layer(Bottleneck, 64, 4)
 
-        self.stage2_cfg = cfg['MODEL']['HRNET']['HRNET_DETAIL']['EXTRA']['STAGE2']
+        self.stage2_cfg = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['STAGE2']
         num_channels = self.stage2_cfg['NUM_CHANNELS']
         block = blocks_dict[self.stage2_cfg['BLOCK']]
         num_channels = [
@@ -296,7 +296,7 @@ class PoseHighResolutionNet(nn.Module):
         self.stage2, pre_stage_channels = self._make_stage(
             self.stage2_cfg, num_channels)
 
-        self.stage3_cfg = cfg['MODEL']['HRNET']['HRNET_DETAIL']['EXTRA']['STAGE3']
+        self.stage3_cfg = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['STAGE3']
         num_channels = self.stage3_cfg['NUM_CHANNELS']
         block = blocks_dict[self.stage3_cfg['BLOCK']]
         num_channels = [
@@ -307,7 +307,7 @@ class PoseHighResolutionNet(nn.Module):
         self.stage3, pre_stage_channels = self._make_stage(
             self.stage3_cfg, num_channels)
 
-        self.stage4_cfg = cfg['MODEL']['HRNET']['HRNET_DETAIL']['EXTRA']['STAGE4']
+        self.stage4_cfg = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['STAGE4']
         num_channels = self.stage4_cfg['NUM_CHANNELS']
         block = blocks_dict[self.stage4_cfg['BLOCK']]
         num_channels = [
@@ -327,7 +327,7 @@ class PoseHighResolutionNet(nn.Module):
             padding=1 if extra.FINAL_CONV_KERNEL == 3 else 0
         )
 
-        self.pretrained_layers = cfg['MODEL']['HRNET']['HRNET_DETAIL']['EXTRA']['PRETRAINED_LAYERS']
+        self.pretrained_layers = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['PRETRAINED_LAYERS']
 
     def _make_transition_layer(
             self, num_channels_pre_layer, num_channels_cur_layer):

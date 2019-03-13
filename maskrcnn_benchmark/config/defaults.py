@@ -376,7 +376,7 @@ _C.MODEL.HRNET.DEBUG_SAVE_BATCH_IMAGES_PRED = False
 _C.MODEL.HRNET.DEBUG_SAVE_HEATMAPS_GT = False
 _C.MODEL.HRNET.DEBUG_SAVE_HEATMAPS_PRED = False
 
-
+'''
 def update_config(cfg, args):
     cfg.defrost()
     cfg.merge_from_file(args.cfg)
@@ -405,7 +405,7 @@ def update_config(cfg, args):
         )
 
     cfg.freeze()
-
+'''
 '''
 if __name__ == '__main__':
     import sys
