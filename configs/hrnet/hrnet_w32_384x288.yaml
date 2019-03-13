@@ -139,8 +139,8 @@ MODEL:
     SHARE_BOX_FEATURE_EXTRACTOR: False
   KEYPOINT_ON: True
 DATASETS:
-  TRAIN: ("person_keypoints_train2017",)
-  TEST: ("person_keypoints_val2017",)
+  TRAIN: ("keypoints_coco_2017_train",)
+  TEST: ("keypoints_coco_2017_val",)
 INPUT:
   MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
   MAX_SIZE_TRAIN: 1000
