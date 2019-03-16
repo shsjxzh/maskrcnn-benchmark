@@ -16,6 +16,11 @@ from __future__ import print_function
 import os
 import logging
 
+from collections import OrderedDict
+
+from maskrcnn_benchmark.modeling import registry
+from maskrcnn_benchmark.modeling.make_layers import conv_with_kaiming_uniform
+
 BN_MOMENTUM = 0.1
 logger = logging.getLogger(__name__)
 
