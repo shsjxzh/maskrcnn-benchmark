@@ -495,7 +495,7 @@ class PoseHighResolutionNet(nn.Module):
 def build_hrnet(cfg, is_train, **kwargs):
     model = PoseHighResolutionNet(cfg, **kwargs)
 
-    if is_train and cfg.MODEL.HRNET.INIT_WEIGHTS:
-        model.init_weights(cfg.MODEL.HRNET.PRETRAINED)
+    # if is_train and cfg.MODEL.HRNET.INIT_WEIGHTS:
+      #   model.init_weights(cfg.MODEL.HRNET.PRETRAINED)
 
     return model
