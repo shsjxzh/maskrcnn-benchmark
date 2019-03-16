@@ -45,6 +45,7 @@ class TestBackbones(unittest.TestCase):
             N, C_in, H, W = 2, 3, 224, 256
             input = torch.rand([N, C_in, H, W], dtype=torch.float32)
             out = backbone(input)
+            print(out.size())
             for cur_out in out:
                 self.assertEqual(
                     cur_out.shape[:2],
