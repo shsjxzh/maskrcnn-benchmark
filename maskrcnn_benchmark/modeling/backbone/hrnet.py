@@ -495,7 +495,7 @@ class PoseHighResolutionNet(nn.Module):
             logger.error('=> please download pre-trained models first!')
             raise ValueError('{} is not exist!'.format(pretrained))
 
-
+'''
 @registry.BACKBONES.register("HRNET")
 def build_hrnet(cfg):# , is_train, **kwargs):
     model = PoseHighResolutionNet(cfg, **kwargs)
@@ -504,3 +504,4 @@ def build_hrnet(cfg):# , is_train, **kwargs):
       #   model.init_weights(cfg.MODEL.HRNET.PRETRAINED)
 
     return model
+'''

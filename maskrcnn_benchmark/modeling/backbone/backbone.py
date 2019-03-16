@@ -7,6 +7,7 @@ from maskrcnn_benchmark.modeling import registry
 from maskrcnn_benchmark.modeling.make_layers import conv_with_kaiming_uniform
 from . import fpn as fpn_module
 from . import resnet
+from . import hrnet
 
 
 @registry.BACKBONES.register("R-50-C4")
@@ -68,6 +69,15 @@ def build_resnet_fpn_p3p7_backbone(cfg):
     )
     model = nn.Sequential(OrderedDict([("body", body), ("fpn", fpn)]))
     model.out_channels = out_channels
+    return model
+
+@registry.BACKBONES.register("HRNET")
+def build_hrnet(cfg):# , is_train, **kwargs):
+    model = hrnet.PoseHighResolutionNet(cfg, **kwargs)
+
+    # if is_train and cfg.MODEL.HRNET.INIT_WEIGHTS:
+      #   model.init_weights(cfg.MODEL.HRNET.PRETRAINED)
+
     return model
 
 
