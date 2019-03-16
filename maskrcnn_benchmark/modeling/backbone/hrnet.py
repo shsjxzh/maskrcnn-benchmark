@@ -326,7 +326,7 @@ class PoseHighResolutionNet(nn.Module):
 
         self.final_layer = nn.Conv2d(
             in_channels=pre_stage_channels[0],
-            out_channels=cfg.MODEL.NUM_JOINTS,
+            out_channels=cfg.MODEL.HRNET.DETAIL_NUM_JOINTS,
             kernel_size=extra.FINAL_CONV_KERNEL,
             stride=1,
             padding=1 if extra.FINAL_CONV_KERNEL == 3 else 0
