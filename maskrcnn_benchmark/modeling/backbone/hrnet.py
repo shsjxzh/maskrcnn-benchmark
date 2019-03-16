@@ -278,7 +278,9 @@ class PoseHighResolutionNet(nn.Module):
 
     def __init__(self, cfg, **kwargs):
         self.inplanes = 64
-        self.out_channels = cfg.MODEL.HRNET.DETAIL_EXTRA.STAGE4.NUM_CHANNELS[-1]
+        # this is stupid!!
+        self.out_channels = 32
+        # self.out_channels = cfg.MODEL.HRNET.DETAIL_EXTRA.STAGE4.NUM_CHANNELS[-1]
         extra = cfg.MODEL.HRNET.DETAIL_EXTRA
         super(PoseHighResolutionNet, self).__init__()
 
