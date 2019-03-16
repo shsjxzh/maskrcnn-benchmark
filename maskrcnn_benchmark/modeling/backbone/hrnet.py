@@ -492,7 +492,7 @@ class PoseHighResolutionNet(nn.Module):
 
 
 @registry.BACKBONES.register("HRNet")
-def build_hrnet(cfg, is_train, **kwargs):
+def build_hrnet(cfg):# , is_train, **kwargs):
     model = PoseHighResolutionNet(cfg, **kwargs)
 
     # if is_train and cfg.MODEL.HRNET.INIT_WEIGHTS:
