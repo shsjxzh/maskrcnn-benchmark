@@ -491,7 +491,7 @@ class PoseHighResolutionNet(nn.Module):
             raise ValueError('{} is not exist!'.format(pretrained))
 
 
-@registry.BACKBONES.register("HRNet")
+@registry.BACKBONES.register("HRNET")
 def build_hrnet(cfg):# , is_train, **kwargs):
     model = PoseHighResolutionNet(cfg, **kwargs)
 
