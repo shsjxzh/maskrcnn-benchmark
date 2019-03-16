@@ -72,7 +72,7 @@ def build_resnet_fpn_p3p7_backbone(cfg):
     return model
 
 @registry.BACKBONES.register("HRNET")
-def build_hrnet(cfg):# , is_train, **kwargs):
+def build_hrnet(cfg, **kwargs):# , is_train, ):
     model = hrnet.PoseHighResolutionNet(cfg, **kwargs)
 
     # if is_train and cfg.MODEL.HRNET.INIT_WEIGHTS:
