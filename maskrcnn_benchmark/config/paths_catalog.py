@@ -48,11 +48,11 @@ class DatasetCatalog(object):
             "ann_file": "coco/annotations/person_keypoints_valminusminival2014.json",
         },
         "keypoints_coco_2017_train": {
-            "img_dir": "coco/train2014",
+            "img_dir": "coco/train2017",
             "ann_file": "coco/annotations/person_keypoints_train2017.json",
         },
         "keypoints_coco_2017_val": {
-            "img_dir": "coco/val2014",
+            "img_dir": "coco/val2017",
             "ann_file": "coco/annotations/person_keypoints_val2017.json"
         },
         "voc_2007_train": {
