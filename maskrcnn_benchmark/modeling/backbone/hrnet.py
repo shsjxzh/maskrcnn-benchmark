@@ -278,8 +278,6 @@ class PoseHighResolutionNet(nn.Module):
 
     def __init__(self, cfg, **kwargs):
         self.inplanes = 64
-        # this is stupid!!
-        self.out_channels = 32
         # self.out_channels = cfg.MODEL.HRNET.DETAIL_EXTRA.STAGE4.NUM_CHANNELS[-1]
         extra = cfg.MODEL.HRNET.DETAIL_EXTRA
         super(PoseHighResolutionNet, self).__init__()
@@ -326,7 +324,9 @@ class PoseHighResolutionNet(nn.Module):
         self.stage4, pre_stage_channels = self._make_stage(
             # self.stage4_cfg, num_channels, multi_scale_output=False)
             self.stage4_cfg, num_channels)
-
+        
+        self.out_channels = pre_stage_channels[0]
+        
         self.final_layer = nn.Conv2d(
             in_channels=pre_stage_channels[0],
             out_channels=cfg.MODEL.HRNET.DETAIL_NUM_JOINTS,
