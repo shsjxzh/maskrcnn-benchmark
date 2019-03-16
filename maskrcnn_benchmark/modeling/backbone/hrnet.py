@@ -278,7 +278,7 @@ class PoseHighResolutionNet(nn.Module):
 
     def __init__(self, cfg, **kwargs):
         self.inplanes = 64
-        extra = cfg.MODEL.HRNET.EXTRA
+        extra = cfg.MODEL.HRNET.DETAIL_EXTRA
         super(PoseHighResolutionNet, self).__init__()
 
         # stem net
