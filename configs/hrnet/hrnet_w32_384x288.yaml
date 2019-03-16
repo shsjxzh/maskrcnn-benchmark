@@ -93,7 +93,7 @@ MODEL:
         - 128
         - 256
         FUSE_METHOD: SUM
-  LOSS_USE_TARGET_WEIGHT: true
+  # LOSS_USE_TARGET_WEIGHT: true
   
   TRAIN_BATCH_SIZE_PER_GPU: 32
   TRAIN_SHUFFLE: true
