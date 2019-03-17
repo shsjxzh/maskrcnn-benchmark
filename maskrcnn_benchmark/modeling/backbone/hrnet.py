@@ -466,7 +466,7 @@ class PoseHighResolutionNet(nn.Module):
 
         x_list = []
         for i in range(len(y_list)):
-            x_list = self.final_layer[i](y_list[i])
+            x_list.append(self.final_layer[i](y_list[i]))
         y_list = x_list
         # x = self.final_layer(y_list[0])
 
