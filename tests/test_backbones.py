@@ -17,7 +17,7 @@ BACKBONE_CFGS = {
     "R-152-FPN": "e2e_faster_rcnn_R_101_FPN_1x.yaml",
     "R-50-FPN-RETINANET": "retinanet/retinanet_R-50-FPN_1x.yaml",
     "R-101-FPN-RETINANET": "retinanet/retinanet_R-101-FPN_1x.yaml",
-    "HRNEt": "hrnet/hrnet_w32_384x288.yaml",
+    "HRNEt": "hrnet/hrnet_w32_384x288.yaml"
 }
 
 
@@ -30,6 +30,7 @@ class TestBackbones(unittest.TestCase):
         for name, backbone_builder in registry.BACKBONES.items():
             print('Testing {}...'.format(name))
             if name in BACKBONE_CFGS:
+                print('true')
                 cfg = load_config(BACKBONE_CFGS[name])
             else:
                 # Use default config if config file is not specified
