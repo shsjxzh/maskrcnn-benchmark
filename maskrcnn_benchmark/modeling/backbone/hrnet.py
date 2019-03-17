@@ -334,7 +334,7 @@ class PoseHighResolutionNet(nn.Module):
                 kernel_size=extra.FINAL_CONV_KERNEL,
                 stride=1,
                 padding=1 if extra.FINAL_CONV_KERNEL == 3 else 0
-            )
+            ).cuda()
         )
 
         self.pretrained_layers = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['PRETRAINED_LAYERS']
@@ -466,7 +466,7 @@ class PoseHighResolutionNet(nn.Module):
 
         x_list = []
         for i in range(len(y_list)):
-            x_list.append(self.final_layer[i](y_list[i]).cuda())
+            x_list.append(self.final_layer[i](y_list[i]))
         y_list = x_list
         # x = self.final_layer(y_list[0])
 
