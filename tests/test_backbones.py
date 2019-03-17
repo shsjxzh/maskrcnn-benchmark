@@ -49,7 +49,7 @@ class TestBackbones(unittest.TestCase):
             out = backbone(input)
             if name == "HRNET":
                 for i in out:
-                    print(out.size())
+                    print(i.size())
             # print(out)
             for cur_out in out:
                 self.assertEqual(
