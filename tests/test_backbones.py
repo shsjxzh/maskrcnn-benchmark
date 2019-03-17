@@ -33,6 +33,7 @@ class TestBackbones(unittest.TestCase):
                 print('true')
                 cfg = load_config(BACKBONE_CFGS[name])
             else:
+                print('false')
                 # Use default config if config file is not specified
                 cfg = copy.deepcopy(g_cfg)
             backbone = backbone_builder(cfg)
