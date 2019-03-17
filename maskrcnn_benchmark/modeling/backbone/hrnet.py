@@ -326,9 +326,9 @@ class PoseHighResolutionNet(nn.Module):
             self.stage4_cfg, num_channels)
         
         self.out_channels = 256
-        self.final_layer = []
+        final_layer = []
         for i in range(len(pre_stage_channels)):
-            self.final_layer.append(nn.Conv2d(
+            final_layer.append(nn.Conv2d(
                 in_channels=pre_stage_channels[i],
                 out_channels=self.out_channels,
                 kernel_size=extra.FINAL_CONV_KERNEL,
@@ -336,6 +336,7 @@ class PoseHighResolutionNet(nn.Module):
                 padding=1 if extra.FINAL_CONV_KERNEL == 3 else 0
             )
         )
+        self.final_layer = nn.ModuleList(final_layer)
 
         self.pretrained_layers = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['PRETRAINED_LAYERS']
 
