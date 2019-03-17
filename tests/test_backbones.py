@@ -47,7 +47,7 @@ class TestBackbones(unittest.TestCase):
             N, C_in, H, W = 2, 3, 224, 256
             input = torch.rand([N, C_in, H, W], dtype=torch.float32)
             out = backbone(input)
-            if name == "HRNET":
+            if name == "HRNET" or "R-101-FPN":
                 for i in out:
                     print(i.size())
             # print(out)
