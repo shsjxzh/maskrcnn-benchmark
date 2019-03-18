@@ -2,6 +2,7 @@ MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
   BACKBONE:
     CONV_BODY: "HRNET"
+  WEIGHT: '../model_final.pth'
 
   HRNET:
     AUTO_RESUME: true
