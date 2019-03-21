@@ -147,8 +147,8 @@ def main():
     args.distributed = num_gpus > 1
 
     # try something
-    # args.local_rank = 1
-    # args.distributed = True
+    args.local_rank = 1
+    args.distributed = True
 
 
     if args.distributed:
