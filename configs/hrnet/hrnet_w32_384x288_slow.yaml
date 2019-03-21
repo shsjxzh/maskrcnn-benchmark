@@ -3,7 +3,7 @@ MODEL:
   BACKBONE:
     CONV_BODY: "HRNET"
   # WEIGHT: '../model_final.pth'
-  DEVICE: "cuda:2"
+  DEVICE: "cuda:1"
   HRNET:
     AUTO_RESUME: true
     CUDNN_BENCHMARK: true
