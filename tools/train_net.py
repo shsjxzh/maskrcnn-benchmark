@@ -152,7 +152,6 @@ def main():
     # args.local_rank = 1
     # args.distributed = True
 
-
     if args.distributed:
         torch.cuda.set_device(args.local_rank)
         torch.distributed.init_process_group(
