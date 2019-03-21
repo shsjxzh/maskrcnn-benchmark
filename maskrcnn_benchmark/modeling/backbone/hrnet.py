@@ -325,7 +325,7 @@ class PoseHighResolutionNet(nn.Module):
             self.stage4_cfg, num_channels, multi_scale_output=False)
             # self.stage4_cfg, num_channels)
         
-        self.out_channels = 256
+        self.out_channels = cfg.MODEL.HRNET.BACKBONE_OUT_CHANNELS
         final_layer = []
         for i in range(len(pre_stage_channels)):
             final_layer.append(nn.Conv2d(
