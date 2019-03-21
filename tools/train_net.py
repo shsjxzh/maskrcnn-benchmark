@@ -34,12 +34,22 @@ def train(cfg, local_rank, distributed):
     optimizer = make_optimizer(cfg, model)
     scheduler = make_lr_scheduler(cfg, optimizer)
 
+    '''
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
             model, device_ids=[local_rank], output_device=local_rank,
             # this should be removed if we update BatchNorm stats
             broadcast_buffers=False,
         )
+    '''
+
+    if distributed:
+        model = torch.nn.parallel.DistributedDataParallel(
+            model, device_ids=local_rank, output_device=local_rank[0],
+            # this should be removed if we update BatchNorm stats
+            broadcast_buffers=False,
+        )
+
 
     arguments = {}
     arguments["iteration"] = 0
@@ -164,7 +174,8 @@ def main():
         logger.info(config_str)
     logger.info("Running with config:\n{}".format(cfg))
 
-    model = train(cfg, args.local_rank, args.distributed)
+    # model = train(cfg, args.local_rank, args.distributed)
+    model = train(cfg, [1,2], True)
 
     if not args.skip_test:
         run_test(cfg, model, args.distributed)
