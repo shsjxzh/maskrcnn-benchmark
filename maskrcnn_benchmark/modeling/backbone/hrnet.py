@@ -336,7 +336,7 @@ class PoseHighResolutionNet(nn.Module):
                 padding=1 if extra.FINAL_CONV_KERNEL == 3 else 0
             )
         )
-        self.final_layer = nn.ModuleList(final_layer).cuda()
+        # self.final_layer = nn.ModuleList(final_layer).cuda()
 
         self.pretrained_layers = cfg['MODEL']['HRNET']['DETAIL_EXTRA']['PRETRAINED_LAYERS']
 
