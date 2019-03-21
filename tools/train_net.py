@@ -44,7 +44,7 @@ def train(cfg, local_rank, distributed):
     '''
 
     if distributed:
-        model = torch.nn.parallel.DistributedDataParallel(
+        model = torch.nn.DataParallel(
             model, device_ids=local_rank, output_device=local_rank[0],
             # this should be removed if we update BatchNorm stats
             broadcast_buffers=False,
@@ -147,8 +147,8 @@ def main():
     args.distributed = num_gpus > 1
 
     # try something
-    args.local_rank = 1
-    args.distributed = True
+    # args.local_rank = 1
+    # args.distributed = True
 
 
     if args.distributed:
