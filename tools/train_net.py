@@ -29,7 +29,7 @@ from maskrcnn_benchmark.utils.miscellaneous import mkdir
 def train(cfg, local_rank, distributed):
     model = build_detection_model(cfg)
     device = torch.device(cfg.MODEL.DEVICE)
-    model.to(device)
+    # model.to(device)
 
     optimizer = make_optimizer(cfg, model)
     scheduler = make_lr_scheduler(cfg, optimizer)
@@ -42,13 +42,15 @@ def train(cfg, local_rank, distributed):
             broadcast_buffers=False,
         )
     '''
-
+    '''
     if distributed:
         model = torch.nn.DataParallel(
             model, device_ids=local_rank, output_device=local_rank[0],
             # this should be removed if we update BatchNorm stats
             # broadcast_buffers=False,
         )
+    '''
+    model = torch.nn.DataParallel(model, device_ids = local_rank).to(device)
 
 
     arguments = {}
@@ -180,7 +182,7 @@ def main():
     logger.info("Running with config:\n{}".format(cfg))
 
     # model = train(cfg, args.local_rank, args.distributed)
-    model = train(cfg, [1,2], False)
+    model = train(cfg, [1], False)
 
     if not args.skip_test:
         run_test(cfg, model, args.distributed)
