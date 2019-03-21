@@ -147,8 +147,8 @@ def main():
     args.distributed = num_gpus > 1
 
     # try something
-    args.local_rank = 1
-    args.distributed = True
+    # args.local_rank = 1
+    # args.distributed = True
 
 
     if args.distributed:
@@ -180,7 +180,7 @@ def main():
     logger.info("Running with config:\n{}".format(cfg))
 
     # model = train(cfg, args.local_rank, args.distributed)
-    model = train(cfg, [1,2], True)
+    model = train(cfg, [1,2], False)
 
     if not args.skip_test:
         run_test(cfg, model, args.distributed)
