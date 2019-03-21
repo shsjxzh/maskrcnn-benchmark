@@ -322,8 +322,8 @@ class PoseHighResolutionNet(nn.Module):
         self.transition3 = self._make_transition_layer(
             pre_stage_channels, num_channels)
         self.stage4, pre_stage_channels = self._make_stage(
-            # self.stage4_cfg, num_channels, multi_scale_output=False)
-            self.stage4_cfg, num_channels)
+            self.stage4_cfg, num_channels, multi_scale_output=False)
+            # self.stage4_cfg, num_channels)
         
         self.out_channels = 256
         final_layer = []
@@ -465,10 +465,12 @@ class PoseHighResolutionNet(nn.Module):
                 x_list.append(y_list[i])
         y_list = self.stage4(x_list)
 
+        '''
         x_list = []
         for i in range(len(y_list)):
             x_list.append(self.final_layer[i](y_list[i]))
         y_list = x_list
+        '''
         # x = self.final_layer(y_list[0])
 
         return y_list
