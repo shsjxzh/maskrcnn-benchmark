@@ -2,7 +2,7 @@ MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
   BACKBONE:
     CONV_BODY: "HRNET"
-  WEIGHT: '../model_0195000.pth'
+  WEIGHT: './model_0195000.pth'
   DEVICE: "cuda"
   HRNET:
     AUTO_RESUME: true
